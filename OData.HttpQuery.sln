@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OData.HttpQuery", "OData.HttpQuery.csproj", "{72FEC57B-676A-4789-A526-2583D325DB6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OData.HttpQuery.Moc", "OData.HttpQuery.Moc\OData.HttpQuery.Moc.csproj", "{CC264DB3-DC96-4085-B2CA-51ACA35D7253}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OData.HttpQuery.Linq", "OData.HttpQuery.Linq\OData.HttpQuery.Linq.csproj", "{B7553B94-932D-4C06-8A30-92F44E6530B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{72FEC57B-676A-4789-A526-2583D325DB6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72FEC57B-676A-4789-A526-2583D325DB6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72FEC57B-676A-4789-A526-2583D325DB6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72FEC57B-676A-4789-A526-2583D325DB6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC264DB3-DC96-4085-B2CA-51ACA35D7253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC264DB3-DC96-4085-B2CA-51ACA35D7253}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC264DB3-DC96-4085-B2CA-51ACA35D7253}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC264DB3-DC96-4085-B2CA-51ACA35D7253}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7553B94-932D-4C06-8A30-92F44E6530B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7553B94-932D-4C06-8A30-92F44E6530B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7553B94-932D-4C06-8A30-92F44E6530B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7553B94-932D-4C06-8A30-92F44E6530B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
