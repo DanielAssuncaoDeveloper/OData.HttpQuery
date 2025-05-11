@@ -33,7 +33,14 @@ namespace OData.HttpQuery.Linq.Factory
                     ExpressionType.AndAlso => "and"
                 };
 
-                filter = $"{filter} {leftCondition} {logicalOperator} {rightCondition}";
+                string newLogicalOperation = $"{leftCondition} {logicalOperator} {rightCondition}";
+                
+                // Adicionamos parênteses em todas operações OR devido a forma que a árvore de expressão é organizada,
+                // pois as operações de maior precedência sempre ficam no mesmo nó.
+                if (binaryExp.NodeType == ExpressionType.OrElse) 
+                    newLogicalOperation = $"({newLogicalOperation})";
+                
+                filter += newLogicalOperation;
             }
             else
             {

@@ -7,4 +7,5 @@ string nomeTeste = teste.BomNome.Nome;
 
 var factory = new ODataFactory<Contact>();
 
-factory.Filter(x => x.Name == teste.BomNome.Nome && x.IsLead == true || x.Salary > 100.10);
+factory.Filter(x => x.Name == "DateTime.Now" && x.IsLead == true || x.Salary > 100.10);
+Console.WriteLine();
