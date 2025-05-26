@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security;
 
 namespace OData.HttpQuery.Linq.Factory
 {
@@ -21,6 +18,7 @@ namespace OData.HttpQuery.Linq.Factory
         private string ODataFilterRecursive(BinaryExpression binaryExp)
         {
             string filter = string.Empty;
+            if (binaryExp is null) return filter;
 
             if (binaryExp.NodeType == ExpressionType.OrElse || binaryExp.NodeType == ExpressionType.AndAlso)
             {
@@ -33,13 +31,7 @@ namespace OData.HttpQuery.Linq.Factory
                     ExpressionType.AndAlso => "and"
                 };
 
-                string newLogicalOperation = $"{leftCondition} {logicalOperator} {rightCondition}";
-                
-                // Adicionamos parênteses em todas operações OR devido a forma que a árvore de expressão é organizada,
-                // pois as operações de maior precedência sempre ficam no mesmo nó.
-                if (binaryExp.NodeType == ExpressionType.OrElse) 
-                    newLogicalOperation = $"({newLogicalOperation})";
-                
+                string newLogicalOperation = $"({leftCondition} {logicalOperator} {rightCondition})";
                 filter += newLogicalOperation;
             }
             else
@@ -102,17 +94,33 @@ namespace OData.HttpQuery.Linq.Factory
                     lastFildValue = propertyInfo.GetValue(lastFildValue);
                 }
 
-                // todo: adicionar tratamentos de tipo
-                return lastFildValue?.ToString();
+                return GetValueNormalized(lastFildValue);
             }
             else if (expression.NodeType == ExpressionType.Constant)
             {
                 var constantExp = expression as ConstantExpression;
-                paramCondition = constantExp.Value.ToString();
-                return paramCondition;
+                return GetValueNormalized(constantExp.Value);
             }
 
             return paramCondition;
+        }
+
+
+        private string GetValueNormalized(object value)
+        {
+            if (value is null) return "null";
+            if (value is string strValue) return $"'{strValue.Replace("'", "''")}'";
+            if (value is DateTime datetimeValue) return datetimeValue.ToString("yyyy-MM-ss HH:mm:ss.d");
+            if (value is decimal decimalValue) return decimalValue.ToString(CultureInfo.InvariantCulture);
+            if (value is double doubleValue) return doubleValue.ToString(CultureInfo.InvariantCulture);
+            if (value is float floatValue) return floatValue.ToString(CultureInfo.InvariantCulture);
+            if (value is long longValue) return longValue.ToString(CultureInfo.InvariantCulture);
+            if (value is int intValue) return intValue.ToString(CultureInfo.InvariantCulture);
+            if (value is short shortValue) return shortValue.ToString(CultureInfo.InvariantCulture);
+            if (value is true) return "true";
+            if (value is false) return "false";
+
+            return string.Empty;
         }
     }
 
